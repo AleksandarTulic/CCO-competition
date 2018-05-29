@@ -23,53 +23,53 @@ int main()
     cin>>tests;
     while (tests--)
     {
-    int n;
+        int n;
 
-    cin>>n;
+        cin>>n;
 
-    point ko[n];
+        point ko[n];
 
-    for (int i=0;i<n;i++) cin>>ko[i].x>>ko[i].y;
+        for (int i=0;i<n;i++) cin>>ko[i].x>>ko[i].y;
 
-    int left=0;
-    for (int i=1;i<n;i++)
-        if ( ko[left].x > ko[i].x ) left=i;
+        int left=0;
+        for (int i=1;i<n;i++)
+            if ( ko[left].x > ko[i].x ) left=i;
 
-    vector <point> w;
+        vector <point> w;
 
-    int w1=left,w2;
-    do
-    {
-        w2=(w1+1)%n;
-        for (int i=0;i<n;i++)
-            if ( orjentacija(ko[w1],ko[i],ko[w2]) ) w2=i;
-
-        w.push_back({ko[w1].x,ko[w1].y});
-        w1=w2;
-    }while (w1!=left);
-
-    double uda=0.0;
-    for (int i=0;i<w.size();i++)
-    {
-        double x1,y1,x2,y2;
-        if ( i==(w.size()-1) )
+        int w1=left,w2;
+        do
         {
-            x1=w[i].x;
-            y1=w[i].y;
-            x2=w[0].x;
-            y2=w[0].y;
-        }
-        else
-        {
-            x1=w[i].x;
-            y1=w[i].y;
-            x2=w[i+1].x;
-            y2=w[i+1].y;
-        }
-        uda+=udaljenost(x1,y1,x2,y2);
-    }
+            w2=(w1+1)%n;
+            for (int i=0;i<n;i++)
+                if ( orjentacija(ko[w1],ko[i],ko[w2]) ) w2=i;
 
-    cout<<setprecision(2)<<fixed<<uda<<endl;
+            w.push_back({ko[w1].x,ko[w1].y});
+            w1=w2;
+        }while (w1!=left);
+
+        double uda=0.0;
+        for (int i=0;i<w.size();i++)
+        {
+            double x1,y1,x2,y2;
+            if ( i==(w.size()-1) )
+            {
+                x1=w[i].x;
+                y1=w[i].y;
+                x2=w[0].x;
+                y2=w[0].y;
+            }
+            else
+            {
+                x1=w[i].x;
+                y1=w[i].y;
+                x2=w[i+1].x;
+                y2=w[i+1].y;
+            }
+            uda+=udaljenost(x1,y1,x2,y2);
+        }
+
+        cout<<setprecision(2)<<fixed<<uda<<endl;
     }
     return 0;
 }
